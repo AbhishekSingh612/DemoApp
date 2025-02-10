@@ -3,6 +3,7 @@
     import { Button } from "$lib/components/ui/button/index.js";
 	import * as Card from "$lib/components/ui/card/index.js";
 	import { Input } from "$lib/components/ui/input/index.js";
+    import PasswordInput from "$lib/components/ui/password-input/password-input.svelte"
 </script>
 
 <div class="flex flex-col h-screen w-full items-center justify-center px-4">
@@ -16,10 +17,10 @@
                 <div class="grid gap-4">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="grid gap-2">
-                          <Input id="first-name" placeholder="First name" required />
+                          <Input id="first-name" name="first-name" placeholder="First name" required />
                         </div>
                         <div class="grid gap-2">
-                          <Input id="last-name" placeholder="Last name" required />
+                          <Input id="last-name" name="last-name" placeholder="Last name" required />
                         </div>
                       </div>
                     <div class="grid gap-2">
@@ -27,7 +28,7 @@
                         <Input id="email" type="email" name="email" placeholder="Email" required />
                     </div>
                     <div class="grid gap-2">
-                        <Input id="password" name="password" type="password" placeholder="Password" required />
+                        <PasswordInput />
                     </div>
                     <Button type="submit" class="w-full">Signup</Button>
                     <!-- <Button variant="outline" class="w-full">Signup with Google</Button> -->

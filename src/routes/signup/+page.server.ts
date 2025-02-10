@@ -4,7 +4,7 @@ import * as auth from '$lib/server/auth';
 import { db } from '$lib/server/db';
 import * as table from '$lib/server/db/schema';
 import type { Actions, PageServerLoad } from './$types';
-import { validateUsername, validatePassword, generateUserId } from "$lib/utils";
+import { validateUsername, validatePassword, validateNotBlank, generateUserId } from "$lib/utils";
 
 
 export const load: PageServerLoad = async (event) => {
@@ -19,12 +19,20 @@ export const actions: Actions = {
 		const formData = await event.request.formData();
 		const username = formData.get('email');
 		const password = formData.get('password');
+		const firstname = formData.get('first-name');
+		const lastname = formData.get('last-name');
 
 		if (!validateUsername(username)) {
 			return fail(400, { message: 'Invalid email' });
 		}
 		if (!validatePassword(password)) {
 			return fail(400, { message: 'Invalid password' });
+		}
+		if (!validateNotBlank(firstname)) {
+			return fail(400, { message: 'Invalid first name' });
+		}
+		if (!validateNotBlank(lastname) ) {
+			return fail(400, { message: 'Invalid last name' });
 		}
 
 		const userId = generateUserId();
@@ -37,7 +45,7 @@ export const actions: Actions = {
 		});
 
 		try {
-			await db.insert(table.user).values({ id: userId, username, passwordHash });
+			await db.insert(table.user).values({ id: userId, username, passwordHash, firstname, lastname });
 
 			const sessionToken = auth.generateSessionToken();
 			const session = await auth.createSession(sessionToken, userId);

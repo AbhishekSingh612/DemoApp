@@ -10,11 +10,13 @@
 <div class="flex flex-col h-screen w-full items-center justify-center px-4">
 	<Card.Root>
 		<Card.Header>
-			<Card.Title>Hi, {data.user.username}!</Card.Title>
+			<Card.Title>Hi, {data.user.firstname}!</Card.Title>
 			<Card.Description></Card.Description>
 		</Card.Header>
 		<Card.Content>
+			<p>Name: {data.user.firstname} {data.user.lastname}</p>
 			<p>User Id: {data.user.id}</p>
+			<p>username: {data.user.username}</p>
 		</Card.Content>
 		<Card.Footer>
 			<form method="post" action="?/logout" use:enhance>

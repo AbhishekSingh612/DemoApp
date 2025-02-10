@@ -29,3 +29,11 @@ export function validatePassword(password: unknown): password is string {
 		password.length <= 255
 	);
 }
+
+export function validateNotBlank(text: unknown): text is string {
+	return (
+		typeof text === 'string' &&
+		text.length > 0 &&
+		text.length <= 255
+	);
+}

@@ -4,16 +4,21 @@
     import { Button } from "$lib/components/ui/button/index.js";
 	import * as Card from "$lib/components/ui/card/index.js";
 	import { Input } from "$lib/components/ui/input/index.js";
+    import * as Alert from "$lib/components/ui/alert/index.js";
+    import PasswordInput from '$lib/components/ui/password-input/password-input.svelte';
 
 	let { form }: { form: ActionData } = $props();
 </script>
-
 <div class="flex flex-col h-screen w-full items-center justify-center px-4">
 	<Card.Root class="mx-auto max-w-sm">
         <Card.Header>
             <Card.Title class="text-2xl">Login</Card.Title>
             <Card.Description>Enter your email below to login to your account</Card.Description>
-            <Card.Description style='color: red'>{form?.message ?? ''}</Card.Description>
+            {#if form?.message}
+            <Alert.Root variant="destructive">
+                <Alert.Description>{form?.message ?? ''}</Alert.Description>
+              </Alert.Root>
+            {/if}
         </Card.Header>
         <Card.Content>
             <form method='post' action='?/login' use:enhance>
@@ -22,7 +27,7 @@
                         <Input id="email" type="email" name="email" placeholder="Email" required />
                     </div>
                     <div class="grid gap-2">
-                        <Input id="password" type="password" name="password" placeholder="Password" required />
+                        <PasswordInput />
                         <div class="flex items-center">
                             <a href="##" class="ml-auto inline-block text-sm underline">
                                 Forgot your password? (TODO)
