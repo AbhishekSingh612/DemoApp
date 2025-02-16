@@ -2,10 +2,13 @@
     import { enhance } from '$app/forms';
     import { Button } from "$lib/components/ui/button/index.js";
 	import * as Card from "$lib/components/ui/card/index.js";
+    import * as Alert from "$lib/components/ui/alert/index.js";
 	import { Input } from "$lib/components/ui/input/index.js";
     import PasswordInput from "$lib/components/ui/password-input/password-input.svelte"
-    import { Ellipsis } from 'lucide-svelte'
+    import Ellipsis from 'lucide-svelte/icons/ellipsis';
+    import type {ActionData} from "../../../.svelte-kit/types/src/routes/login/$types";
     let isLoading = $state(false);
+    let { form }: { form: ActionData } = $props();
 </script>
 
 <div class="flex flex-col h-screen w-full items-center justify-center px-4">
@@ -13,6 +16,11 @@
         <Card.Header>
             <Card.Title class="text-2xl">Signup</Card.Title>
             <Card.Description>Enter your information to create an account.</Card.Description>
+            {#if form?.message}
+                <Alert.Root variant="destructive">
+                    <Alert.Description>{form?.message ?? ''}</Alert.Description>
+                </Alert.Root>
+            {/if}
         </Card.Header>
         <Card.Content>
             <form method='post' action='?/signup' use:enhance={() => {

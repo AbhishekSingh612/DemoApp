@@ -13,12 +13,12 @@ export function generateUserId() {
 	return id;
 }
 
-export function validateUsername(username: unknown): username is string {
+export function validateEmail(email: unknown): email is string {
 	return (
-		typeof username === 'string' &&
-		username.length >= 3 &&
-		username.length <= 31 &&
-		/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(username)
+		typeof email === 'string' &&
+		email.length >= 3 &&
+		email.length <= 31 &&
+		/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
 	);
 }
 

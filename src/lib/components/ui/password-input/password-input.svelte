@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Input } from "$lib/components/ui/input/index.js";
-    import { Eye, EyeOff } from "lucide-svelte";
+    import Eye from 'lucide-svelte/icons/eye';
+    import EyeOff from 'lucide-svelte/icons/eye-off';
     let showPassword = $state(false);
 </script>
 

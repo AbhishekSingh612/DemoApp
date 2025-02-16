@@ -1,11 +1,9 @@
-import { verify } from '@node-rs/argon2';
-import { fail, redirect } from '@sveltejs/kit';
-import { eq } from 'drizzle-orm';
+import {verify} from '@node-rs/argon2';
+import {fail, redirect} from '@sveltejs/kit';
 import * as auth from '$lib/server/auth';
-import { db } from '$lib/server/db';
-import * as table from '$lib/server/db/schema';
-import type { Actions, PageServerLoad } from './$types';
-import { validateUsername, validatePassword, generateUserId } from "$lib/utils";
+import type {Actions, PageServerLoad} from './$types';
+import {validateEmail, validatePassword} from "$lib/utils";
+import {getEmailAuthByEmail} from "$lib/server/db/auth_repository";
 
 export const load: PageServerLoad = async (event) => {
 	if (event.locals.user) {
@@ -17,24 +15,21 @@ export const load: PageServerLoad = async (event) => {
 export const actions: Actions = {
 	login: async (event) => {
 		const formData = await event.request.formData();
-		const username = formData.get('email');
+		const email = formData.get('email');
 		const password = formData.get('password');
 
-		if (!validateUsername(username)) {
-			return fail(400, { message: `Invalid username: ${username} (min 3, max 31 characters, alphanumeric only)` });
+		if (!validateEmail(email)) {
+			return fail(400, { message: `Invalid email: ${email} (min 3, max 31 characters, alphanumeric only)` });
 		}
 		if (!validatePassword(password)) {
 			return fail(400, { message: 'Invalid password (min 6, max 255 characters)' });
 		}
 
-		const results = await db
-			.select()
-			.from(table.user)
-			.where(eq(table.user.username, username));
-
+		const results = await getEmailAuthByEmail(email.toString());
 		const existingUser = results.at(0);
+
 		if (!existingUser) {
-			return fail(400, { message: 'Incorrect username or password' });
+			return fail(400, { message: 'Incorrect email or password' });
 		}
 
 		const validPassword = await verify(existingUser.passwordHash, password, {
@@ -44,11 +39,11 @@ export const actions: Actions = {
 			parallelism: 1,
 		});
 		if (!validPassword) {
-			return fail(400, { message: 'Incorrect username or password' });
+			return fail(400, { message: 'Incorrect email or password' });
 		}
 
 		const sessionToken = auth.generateSessionToken();
-		const session = await auth.createSession(sessionToken, existingUser.id);
+		const session = await auth.createSession(sessionToken, existingUser.userId);
 		auth.setSessionTokenCookie(event, sessionToken, session.expiresAt);
 
 		return redirect(302, '/');

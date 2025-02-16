@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
+		"debug": "vite dev --debug",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
@@ -39,6 +40,7 @@
 		"@node-rs/argon2": "^2.0.2",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
+		"arctic": "^3.3.0",
 		"drizzle-orm": "^0.38.4",
 		"firebase": "^11.3.0",
 		"lucide-svelte": "^0.475.0",

@@ -6,7 +6,7 @@
 	import { Input } from "$lib/components/ui/input/index.js";
     import * as Alert from "$lib/components/ui/alert/index.js";
     import PasswordInput from '$lib/components/ui/password-input/password-input.svelte';
-    import { Ellipsis } from 'lucide-svelte'
+    import Ellipsis from 'lucide-svelte/icons/ellipsis';
 
 	let { form }: { form: ActionData } = $props();
     let isLoading = $state(false);
@@ -50,7 +50,7 @@
                         Login
                     {/if}   
                     </Button>
-                    <!-- TODO: <Button variant="outline" class="w-full">Login with Google</Button> -->
+                     <Button href="/login/google" variant="outline" class="w-full">Login with Google</Button>
                 </div>
             </form>
             <div class="mt-4 text-center text-sm">
