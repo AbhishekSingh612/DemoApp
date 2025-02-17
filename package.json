@@ -44,6 +44,7 @@
 		"drizzle-orm": "^0.38.4",
 		"firebase": "^11.3.0",
 		"lucide-svelte": "^0.475.0",
+		"mode-watcher": "^0.5.1",
 		"postgres": "^3.4.5"
 	}
 }

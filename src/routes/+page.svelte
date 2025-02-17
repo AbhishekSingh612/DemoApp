@@ -8,7 +8,7 @@
 	let isLoading = $state(false);
 </script>
 
-<div class="flex flex-col h-screen w-full items-center justify-center px-4">
+<div class="flex flex-col w-full items-center justify-center px-4">
 	<Card.Root>
 		<Card.Header>
 			<Card.Title>Hi, {data.user.firstName}!</Card.Title>

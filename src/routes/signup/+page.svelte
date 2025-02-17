@@ -7,15 +7,16 @@
     import PasswordInput from "$lib/components/ui/password-input/password-input.svelte"
     import Ellipsis from 'lucide-svelte/icons/ellipsis';
     import type {ActionData} from "../../../.svelte-kit/types/src/routes/login/$types";
+    import GoogleLogo from "$lib/components/icons/google-logo.svelte";
     let isLoading = $state(false);
     let { form }: { form: ActionData } = $props();
 </script>
 
-<div class="flex flex-col h-screen w-full items-center justify-center px-4">
-	<Card.Root class="mx-auto max-w-sm">
-        <Card.Header>
-            <Card.Title class="text-2xl">Signup</Card.Title>
-            <Card.Description>Enter your information to create an account.</Card.Description>
+<div class="flex flex-col w-full items-center justify-center md:px-4">
+	<Card.Root class="max-w-sm">
+        <Card.Header class="text-center">
+            <Card.Title class="text-2xl">Create an account</Card.Title>
+            <Card.Description>Enter your information to create your account.</Card.Description>
             {#if form?.message}
                 <Alert.Root variant="destructive">
                     <Alert.Description>{form?.message ?? ''}</Alert.Description>
@@ -50,10 +51,21 @@
                         {#if isLoading}
                             <div class="animate-pulse"><Ellipsis /></div>
                         {:else}
-                            Signup
+                            Create Account
                         {/if}   
                         </Button>
-                    <!-- <Button variant="outline" class="w-full">Signup with Google</Button> -->
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <span class="w-full border-t"></span>
+                        </div>
+                        <div class="relative flex justify-center text-xs uppercase">
+                            <span class="bg-background text-muted-foreground px-2"> Or </span>
+                        </div>
+                    </div>
+                    <Button href="/login/google" variant="outline" class="w-full">
+                        <GoogleLogo />
+                        Sign up with Google
+                    </Button>
                 </div>
             </form>
             <div class="mt-4 text-center text-sm">
