@@ -8,6 +8,7 @@
     import Ellipsis from 'lucide-svelte/icons/ellipsis';
     import type {ActionData} from "../../../.svelte-kit/types/src/routes/login/$types";
     import GoogleLogo from "$lib/components/icons/google-logo.svelte";
+    import SpotifyLogo from "$lib/components/icons/spotify-logo.svelte";
     let isLoading = $state(false);
     let { form }: { form: ActionData } = $props();
 </script>
@@ -65,6 +66,11 @@
                     <Button href="/login/google" variant="outline" class="w-full">
                         <GoogleLogo />
                         Sign up with Google
+                    </Button>
+
+                    <Button href="/login/spotify" variant="outline" class="w-full">
+                        <SpotifyLogo />
+                        Sign up with Spotify
                     </Button>
                 </div>
             </form>

@@ -8,6 +8,7 @@
     import PasswordInput from '$lib/components/ui/password-input/password-input.svelte';
     import Ellipsis from 'lucide-svelte/icons/ellipsis';
     import GoogleLogo from '$lib/components/icons/google-logo.svelte'
+    import SpotifyLogo from '$lib/components/icons/spotify-logo.svelte'
     import {APP_NAME} from "$lib";
 
 	let { form }: { form: ActionData } = $props();
@@ -64,6 +65,11 @@
                         <Button href="/login/google" variant="outline" class="w-full">
                             <GoogleLogo />
                             Login with Google
+                        </Button>
+
+                        <Button href="/login/spotify" variant="outline" class="w-full">
+                            <SpotifyLogo />
+                            Login with Spotify
                         </Button>
                     </div>
                 </form>
