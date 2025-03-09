@@ -1,11 +1,7 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
 	import type { PageServerData } from "./$types";
 	import * as Card from "$lib/components/ui/card/index.js";
-	import { Button } from "$lib/components/ui/button/index.js";
-	import Ellipsis from 'lucide-svelte/icons/ellipsis';
 	let { data }: { data: PageServerData } = $props();
-	let isLoading = $state(false);
 </script>
 
 <div class="flex flex-col w-full items-center justify-center px-4">
