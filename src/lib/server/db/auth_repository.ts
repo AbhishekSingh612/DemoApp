@@ -34,13 +34,14 @@ export async function getUserAuthByEmail(email: string) {
     .where(eq(table.users.email, email));
 }
 
-export async function createUserRecord(email: string, firstName: string, lastName: string) {
+export async function createUserRecord(email: string, firstName: string, lastName: string, pictureUrl: any) {
     // const userId = generateUserId();
     const user: User = (await db.insert(table.users)
         .values({
             email,
             firstName,
-            lastName
+            lastName,
+            pictureUrl
         })
         .returning())[0];
     return user;
@@ -67,7 +68,7 @@ export async function registerUserByEmail(email: string, password: string, first
         return existingUser;
     }
 
-    const user = await createUserRecord(email, firstName, lastName);
+    const user = await createUserRecord(email, firstName, lastName, null);
     await createEmailAuthRecord(user.userId, passwordHash);
     return user;
 }
@@ -79,7 +80,8 @@ export async function getUserBySessionId(sessionId: string) {
             id: table.users.userId,
             email: table.users.email,
             firstName: table.users.firstName,
-            lastName: table.users.lastName
+            lastName: table.users.lastName,
+            pictureUrl: table.users.pictureUrl
         },
         session: table.session
     })
@@ -139,14 +141,14 @@ async function createOAuthUserRecord(userId: any, provider: string, providerUser
         });
 }
 
-export async function createOAuthUser(provider: string, providerUserId: string, firstname: any, lastname: any, email: any) {
+export async function createOAuthUser(provider: string, providerUserId: string, firstname: any, lastname: any, email: any, pictureUrl: any) {
     const [existingUser] = await getUserByEmail(email);
     if (existingUser) {
         await createOAuthUserRecord(existingUser.userId, provider, providerUserId, email);
         return existingUser.userId;
     }
 
-    const user = await createUserRecord(email, firstname, lastname);
+    const user = await createUserRecord(email, firstname, lastname, pictureUrl);
     await createOAuthUserRecord(user.userId, provider, providerUserId);
     return user.userId;
 }

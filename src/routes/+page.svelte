@@ -19,22 +19,5 @@
 			<p>User Id: {data.user.id}</p>
 			<p>username: {data.user.email}</p>
 		</Card.Content>
-		<Card.Footer>
-			<form method="post" action="?/logout" use:enhance={() => {
-                isLoading = true;
-                return async ({ update }) => {
-                    await update();
-                    isLoading = false;
-                };
-            }}>
-				<Button type="submit" class="w-full" disabled={isLoading}>
-					{#if isLoading}
-						<div class="animate-pulse"><Ellipsis /></div>
-					{:else}
-						Sign out
-					{/if}   
-				</Button>
-			</form>
-		</Card.Footer>
 	</Card.Root>
 </div>

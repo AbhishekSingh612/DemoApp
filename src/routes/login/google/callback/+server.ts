@@ -42,7 +42,8 @@ export async function GET(event: RequestEvent): Promise<Response> {
         sub: string,
         email: string,
         given_name: string,
-        family_name: string
+        family_name: string,
+        picture: string
     };
 
     console.log(
@@ -54,6 +55,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
     const email = claims.email;
     const firstName = claims.given_name;
     const lastName = claims.family_name;
+    const pictureUrl = claims.picture;
 
     const existingUser = await getOAuthUserByProviderIdAndProvider(googleUserId);
 
@@ -69,7 +71,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
         });
     }
 
-    const userId = await createOAuthUser('google', googleUserId, firstName, lastName, email);
+    const userId = await createOAuthUser('google', googleUserId, firstName, lastName, email, pictureUrl);
 
     const sessionToken = generateSessionToken();
     const session = await createSession(sessionToken, userId);

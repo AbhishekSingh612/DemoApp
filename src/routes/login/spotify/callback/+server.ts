@@ -51,6 +51,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
     const email = user.email;
     const firstName = user.display_name;
     const lastName = '';
+    const pictureUrl = user.images?.[0]?.url || null
 
     const existingUser = await getOAuthUserByProviderIdAndProvider(spotifyUserId, 'spotify');
 
@@ -66,7 +67,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
         });
     }
 
-    const userId = await createOAuthUser('spotify', spotifyUserId, firstName, lastName, email);
+    const userId = await createOAuthUser('spotify', spotifyUserId, firstName, lastName, email, pictureUrl);
 
     const sessionToken = generateSessionToken();
     const session = await createSession(sessionToken, userId);

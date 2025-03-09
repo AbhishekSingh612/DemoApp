@@ -15,6 +15,7 @@ export const users = pgTable("users", {
     email: varchar("email", { length: 255 }).notNull().unique(),
     firstName: varchar("first_name", { length: 100 }),
     lastName: varchar("last_name", { length: 100 }),
+    pictureUrl: text("picture_url"),
     isEnabled: boolean("is_enabled").notNull().default(true),
     statusUpdatedAt: timestamp("status_updated_at", { withTimezone: true }).defaultNow().notNull(),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),

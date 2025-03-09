@@ -36,6 +36,6 @@
         </div>
     </Sidebar.Inset>
     {#if isLoggedIn}
-        <AppSidebar/>
+        <AppSidebar user={data.user}/>
     {/if}
 </Sidebar.Provider>
