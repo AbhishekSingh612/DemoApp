@@ -4,7 +4,8 @@
     import * as Card from "$lib/components/ui/card/index.js";
     import {Button} from "$lib/components/ui/button";
     import {enhance} from "$app/forms";
-    import {LogOut, Ellipsis} from "lucide-svelte";
+    import LogOut from 'lucide-svelte/icons/log-out';
+    import Ellipsis from 'lucide-svelte/icons/ellipsis';
 
     let isLoading = $state(false);
 

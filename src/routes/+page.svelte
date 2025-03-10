@@ -15,5 +15,8 @@
 			<p>User Id: {data.user.id}</p>
 			<p>username: {data.user.email}</p>
 		</Card.Content>
+		<Card.Footer>
+			<a href="/chat-spotify">chat-spotify</a>
+		</Card.Footer>
 	</Card.Root>
 </div>
